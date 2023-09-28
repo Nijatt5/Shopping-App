@@ -1,0 +1,65 @@
+﻿@using backend.Models;
+@model List<Insan>;
+
+
+    @{
+        Layout = "/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <section class="loglist">   
+        <div class="userpanel">
+            <div class="userpanel1">
+                <img src="/img/image_processing20200203-26580-25pz1w (1).png" class="nicat" />
+                <img src="/img/whitecolor.png" class="white"/>
+                <p class="all">All users</p>
+                <div class="all2"><a href="/User/SignUp"><p>+</p> <p class="new">New user</p><i class="fa-solid fa-user"></i></a></div>
+                <span class="before">
+                    <p>Show</p>
+                    <select name="" id="">
+                        <option value="6">All</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <p>entries</p>
+                </span>
+                <div class="search1">
+                    <input type="search" placeholder="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div class="userpanel2">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Name</th>
+                            <th>Password</th>
+                            <th>Action</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><div class="check"><i class="fa-solid fa-check"></i></div><p></p></td>
+                                <td>@item.InsanName</td>
+                                <td>@item.InsanPassword</td>
+                                <td>
+                                    <a href="/User/LoglistRemove/@item.InsanId" class="remove">
+                                        <div class="remove2">Remove</div>
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+

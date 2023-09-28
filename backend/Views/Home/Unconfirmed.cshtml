@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div class="products">
+    @foreach (var item in Model)
+    {
+        <div class="card  @item.CourseCategoryId">
+            <div class="img">
+                <img src="/img/@item.CourseImg" alt="">
+            </div>
+            <div class="descript">
+                <h1 class="name">@item.CourseName</h1>
+                <p>@item.CourseDescription</p>
+                <div class="more">
+                    <a href="">Edit</a>
+                    <a href="">Remove</a>
+                    <a href="/Home/ReadMore/@item.CourseId">Read More</a>
+                    <a href="/Home/Confirm/@item.CourseId">Confirm</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

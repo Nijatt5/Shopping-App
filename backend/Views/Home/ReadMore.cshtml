@@ -1,0 +1,21 @@
+﻿@using backend.Models;
+@model Course
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div class="products">
+     <div class="card  @Model.CourseCategoryId">
+          <div class="img">
+               <img src="/img/@Model.CourseImg" alt="">
+          </div>
+          <div class="descript">
+               <h1 class="name">@Model.CourseName</h1>
+               <p>@Model.CourseDescription</p>
+               <div class="more">
+                    <a href="">Edit</a>
+                    <a href="">Remove</a>
+               </div>
+          </div>
+     </div>
+</div>

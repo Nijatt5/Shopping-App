@@ -1,0 +1,124 @@
+﻿@using System.Security.Claims;
+@using backend.Models
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <section class="sectionmain">
+        <nav>
+            <img src="/img/GraphicDesign__1_-removebg-preview.png" alt="">
+            <div class="search">
+                <input type="search" placeholder="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="log">
+                <div class="up">
+                    <div class="align">
+                        <i class="fa-solid fa-user"></i>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p>@User.FindFirst(ClaimTypes.Name).Value</p>
+                        }
+                        else
+                        {
+                            <p>Log</p>
+                        }
+                    </div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a class="nav-link" href="/User/Logout">Logout</a></li>
+                        <li><a href="/User/Loglist">LogList</a></li>
+                    }
+                    else
+                    {
+                        <li><a class="nav-link" href="/User/Login">Login</a></li>
+                        <li><a href="/User/SignUp">Sign up</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="menu">
+                <div class="up">
+                    <div class="align">
+                        <i class="fa-solid fa-bars"></i>
+                        <p>Menu</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-up"></i>
+                </div>
+                <ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="/Home/Index">Home</a></li>
+                        <li><a href="/Home/Add">Add</a></li>
+                        <li><a href="/Home/Unconfirmed">Unconfirmed</a></li>
+                        <li><a href="/User/Products/@User.FindFirst(ClaimTypes.Sid).Value">My Products</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Home/Index">Home</a></li>
+                    }
+                </ul>
+            </div>
+            <a href="/Home/Index" class="project">
+                <div class="align">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>Project</p>
+                </div>
+                <div class="count">@ViewBag.say</div>
+            </a>
+        </nav>
+        <div class="main">
+            <div class="filtermain">
+                <i class="fa-solid fa-bars"></i>
+                <div class="fa"><i class="fa-solid fa-bars-staggered"></i>Filter</div>
+                <div class="filter">
+                    <form action="/Home/Filter">
+                        <input type="number" placeholder="Min price" name="minprice">
+                        <input type="number" placeholder="Max price" name="maxprice">
+                        <button>Search</button>
+                    </form>
+                </div>
+                <div class="middle">
+                    <div class="filter1">
+                        <span> All</span><i class="fa-solid fa-angle-down"></i><i class="fa-solid fa-angle-up"></i>
+                    </div>
+                    <div class="category1">
+                        <p cat="show">All<i class="fa-solid fa-check"></i></p>
+                        @foreach (var item in ViewBag.Category)
+                        {
+                            <p cat="@item.CategoryId">@item.CategoryName<i class="fa-solid fa-check"></i></p>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            @RenderBody()
+            <footer>
+                <div class="left">Copyrights 2023 GraphicDesign.</div>
+                <div class="right">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <i class="fa-solid fa-square-envelope"></i>
+                </div>
+            </footer>
+        </div>
+    </section>
+    <script src="/js/JavaScript.js"></script>
+</body>
+
+</html>
